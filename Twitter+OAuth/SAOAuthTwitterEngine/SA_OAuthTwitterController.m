@@ -119,7 +119,6 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 #pragma mark Actions
 - (void) denied {
 	if ([_delegate respondsToSelector: @selector(OAuthTwitterControllerFailed:)]) [_delegate OAuthTwitterControllerFailed: self];
-	[self performSelector: @selector(dismissModalViewControllerAnimated:) withObject: (id) kCFBooleanTrue afterDelay: 1.0];
 }
 
 - (void) gotPin: (NSString *) pin {
@@ -127,12 +126,11 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	[_engine requestAccessToken];
 	
 	if ([_delegate respondsToSelector: @selector(OAuthTwitterController:authenticatedWithUsername:)]) [_delegate OAuthTwitterController: self authenticatedWithUsername: _engine.username];
-	[self performSelector: @selector(dismissModalViewControllerAnimated:) withObject: (id) kCFBooleanTrue afterDelay: 1.0];
 }
 
 - (void) cancel: (id) sender {
 	if ([_delegate respondsToSelector: @selector(OAuthTwitterControllerCanceled:)]) [_delegate OAuthTwitterControllerCanceled: self];
-	[self performSelector: @selector(dismissModalViewControllerAnimated:) withObject: (id) kCFBooleanTrue afterDelay: 0.0];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 //=============================================================================================================================
